@@ -13,7 +13,7 @@ class Corona(BotPlugin):
         print corona stats for germany or specific state
         """
         if self.search(args[0]) != None:
-          return self.print_formatted(corona(args[0]))
+          return self.print_formatted(self.search(args[0]))
         else:
           return "Konnte keine Coronadaten für {} abrufen.".format(args[0])
 
