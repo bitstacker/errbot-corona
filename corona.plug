@@ -6,4 +6,4 @@ Module = corona
 Description = This prints the current corona statistics for every german state.
 
 [Python]
-Version = 3+
+Version = 2+
