@@ -17,7 +17,7 @@ class Corona(BotPlugin):
         else:
           return "Konnte keine Coronadaten für {} abrufen.".format(args[0])
 
-    def search(bundesland):
+    def search(self, bundesland):
       data = requests.get(API_URL).json()
       by_state = {}
       sum_fallzahl = 0
@@ -51,7 +51,7 @@ class Corona(BotPlugin):
       else:
         return None
 
-    def print_formatted(data):
+    def print_formatted(self, data):
       s = ""
       for key, value in data.items():
         s = s + "{}: {}\n".format(str(key), str(value))
