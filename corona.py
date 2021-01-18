@@ -66,6 +66,6 @@ class Corona(BotPlugin):
       return s
 
     def convert_timestamp(self, t):
-      t = t[:-3]
+      t = t * (1/1000)
       dt = datetime.fromtimestamp(t)
       return dt.strftime("%Y-%m-%d %H:%M:%S")
