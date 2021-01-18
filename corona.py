@@ -1,5 +1,6 @@
 from errbot import BotPlugin, botcmd
 import requests
+from datetime import datetime
 
 API_URL="https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/Coronaf%C3%A4lle_in_den_Bundesl%C3%A4ndern/FeatureServer/0/query?where=1%3D1&outFields=OBJECTID_1,LAN_ew_AGS,LAN_ew_GEN,LAN_ew_BEZ,LAN_ew_EWZ,Fallzahl,Aktualisierung,faelle_100000_EW,cases7_bl_per_100k,Death&returnGeometry=false&outSR=&f=json"
 
@@ -30,7 +31,7 @@ class Corona(BotPlugin):
           "msg": "Daten für {}".format(state["attributes"]["LAN_ew_GEN"]),
           "data": {
             "Fallzahl": state["attributes"]["Fallzahl"],
-            "Aktualisierung": state["attributes"]["Aktualisierung"],
+            "Aktualisierung": self.convert_timestamp(state["attributes"]["Aktualisierung"]),
             "Fälle / 100k Einwohner": state["attributes"]["faelle_100000_EW"],
             "Bundeslandweite Fälle der letzten 7 Tage/100.000 EW": state["attributes"]["cases7_bl_per_100k"],
             "Anzahl Todesfälle": state["attributes"]["Death"]
@@ -63,3 +64,8 @@ class Corona(BotPlugin):
       for key, value in data["data"].items():
         s = s + "{}: {}\n".format(str(key), str(value))
       return s
+
+    def convert_timestamp(self, t):
+      t = t[:-3]
+      dt = datetime.fromtimestamp(t)
+      return dt.strftime("%Y-%m-%d %H:%M:%S")
