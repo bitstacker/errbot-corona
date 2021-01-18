@@ -27,32 +27,39 @@ class Corona(BotPlugin):
 
       for state in data["features"]:
         by_state[state["attributes"]["LAN_ew_GEN"]] = {
-          "Fallzahl": state["attributes"]["Fallzahl"],
-          "Aktualisierung": state["attributes"]["Aktualisierung"],
-          "Fälle / 100k Einwohner": state["attributes"]["faelle_100000_EW"],
-          "Bundeslandweite Fälle der letzten 7 Tage/100.000 EW": state["attributes"]["cases7_bl_per_100k"],
-          "Anzahl Todesfälle": state["attributes"]["Death"]
+          "msg": "Daten für {}".format(state),
+          "data": {
+            "Fallzahl": state["attributes"]["Fallzahl"],
+            "Aktualisierung": state["attributes"]["Aktualisierung"],
+            "Fälle / 100k Einwohner": state["attributes"]["faelle_100000_EW"],
+            "Bundeslandweite Fälle der letzten 7 Tage/100.000 EW": state["attributes"]["cases7_bl_per_100k"],
+            "Anzahl Todesfälle": state["attributes"]["Death"]
+          }
         }
         sum_fallzahl = sum_fallzahl + state["attributes"]["Fallzahl"]
         sum_faelle_100k_ew = sum_faelle_100k_ew + state["attributes"]["faelle_100000_EW"]
         sum_cases7_bl_per_100k = sum_cases7_bl_per_100k + state["attributes"]["cases7_bl_per_100k"]
         sum_deaths = sum_deaths + state["attributes"]["Death"]
 
-      by_state["all"] = {
-        "Fallzahl": sum_fallzahl,
-        "Aktualisierung": 0,
-        "Fälle / 100k Einwohner": sum_faelle_100k_ew,
-        "Deutschland - Fälle der letzten 7 Tage/100.000 EW": sum_cases7_bl_per_100k,
-        "Anzahl Todesfälle": sum_deaths
+      country = {
+        "msg": "Daten für Deutschland (Summe alle Bundesländer)",
+        "data": {
+          "Fallzahl": sum_fallzahl,
+          "Aktualisierung": 0,
+          "Fälle / 100k Einwohner": sum_faelle_100k_ew,
+          "Deutschland - Fälle der letzten 7 Tage/100.000 EW": sum_cases7_bl_per_100k,
+          "Anzahl Todesfälle": sum_deaths
+        }
       }
       
       if bundesland in by_state:
         return by_state[bundesland]
       else:
-        return None
+        return country
 
     def print_formatted(self, data):
       s = ""
-      for key, value in data.items():
+      s = s + data["msg"] + "\n"
+      for key, value in data["data"].items():
         s = s + "{}: {}\n".format(str(key), str(value))
       return s
