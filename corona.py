@@ -40,17 +40,12 @@ class Corona(BotPlugin):
           }
         }
         sum_fallzahl = sum_fallzahl + state["attributes"]["Fallzahl"]
-        sum_faelle_100k_ew = sum_faelle_100k_ew + state["attributes"]["faelle_100000_EW"]
-        sum_cases7_bl_per_100k = sum_cases7_bl_per_100k + state["attributes"]["cases7_bl_per_100k"]
         sum_deaths = sum_deaths + state["attributes"]["Death"]
 
       country = {
         "msg": "Daten für Deutschland (Summe alle Bundesländer)",
         "data": {
           "Fallzahl": sum_fallzahl,
-          "Aktualisierung": 0,
-          "Fälle / 100k Einwohner": sum_faelle_100k_ew,
-          "Deutschland - Fälle der letzten 7 Tage/100.000 EW": sum_cases7_bl_per_100k,
           "Anzahl Todesfälle": sum_deaths
         }
       }
