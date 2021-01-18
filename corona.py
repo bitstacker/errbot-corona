@@ -7,7 +7,7 @@ class Corona(BotPlugin):
     """
     This plugin prints the current corona statistics for germany
     """
-    @botcmd  # flags a command
+    @botcmd(split_args_with=None)
     def corona(self, msg, args):  # a command callable with !tryme
         """
         print corona stats for germany or specific state
