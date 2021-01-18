@@ -16,7 +16,12 @@ class Corona(BotPlugin):
         if len(args) == 0:
           return self.print_formatted(self.search("all"))
         if len(args) == 1:
-          return self.print_formatted(self.search(args[0]))
+          if args[0] == "list":
+            return ("Bezeichner der Bundeländer: Schleswig-Holstein, Hamburg, Niedersachsen, Bremen, "
+                "Nordrhein-Westfalen, Hessen, Rheinland-Pfalz, Baden-Württemberg, Bayern, Saarland, "
+                "Berlin, Brandenburg, Mecklenburg-Vorpommern, Sachsen, Sachsen-Anhalt, Thüringen")
+          else:
+            return self.print_formatted(self.search(args[0]))
         else:
           return "Konnte keine Coronadaten für {} abrufen.".format(args[0])
 
