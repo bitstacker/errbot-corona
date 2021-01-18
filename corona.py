@@ -27,7 +27,7 @@ class Corona(BotPlugin):
 
       for state in data["features"]:
         by_state[state["attributes"]["LAN_ew_GEN"]] = {
-          "msg": "Daten für {}".format(state),
+          "msg": "Daten für {}".format(state["attributes"]["LAN_ew_GEN"]),
           "data": {
             "Fallzahl": state["attributes"]["Fallzahl"],
             "Aktualisierung": state["attributes"]["Aktualisierung"],
