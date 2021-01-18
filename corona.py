@@ -34,8 +34,8 @@ class Corona(BotPlugin):
           "data": {
             "Fallzahl": state["attributes"]["Fallzahl"],
             "Aktualisierung": self.convert_timestamp(state["attributes"]["Aktualisierung"]),
-            "Fälle / 100k Einwohner": state["attributes"]["faelle_100000_EW"],
-            "Bundeslandweite Fälle der letzten 7 Tage/100.000 EW": state["attributes"]["cases7_bl_per_100k"],
+            "Fälle / 100k Einwohner": "{:.2f}".format(state["attributes"]["faelle_100000_EW"]),
+            "Bundeslandweite Fälle der letzten 7 Tage/100.000 EW": "{:.2f}".format(state["attributes"]["cases7_bl_per_100k"]),
             "Anzahl Todesfälle": state["attributes"]["Death"]
           }
         }
